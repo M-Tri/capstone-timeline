@@ -1,0 +1,63 @@
+{% extends "timeline/layout.html" %}
+
+{% block body %}
+
+<div class="container mt-5">
+  <form method="POST">
+    {% csrf_token %}
+
+    <div class="row mt-4">
+      <div class="col">
+        <label for="post_title_id" class="form-label small font-weight-bold">Title</label>
+        <input type="text" name="title" id="post_title_id" class="form-control"
+          value="{{ form.title.value|default:'' }}">
+      </div>
+
+      <div class="col">
+        <label for="post_author_name_id" class="form-label small font-weight-bold">Author Name</label>
+        <input type="text" name="author_name" id="post_author_name_id" class="form-control"
+          value="{{ form.author_name.value|default:'' }}">
+      </div>
+    </div>
+
+
+    <div class="row mt-4">
+      <div class="col">
+        <label for="post_content_id" class="form-label small font-weight-bold">Content</label>
+        <textarea name="content" id="post_content_id" row mt-4s="5" class="form-control"
+          placeholder="Enter text...">{{ form.content.value|default:'' }}</textarea>
+      </div>
+    </div>
+
+
+    <div class="row mt-4">
+      <div class="col">
+        <label class="form-label small font-weight-bold">Labels</label>
+        {% for box in form.labels_select %}
+        <div class="form-check">
+          {{ box.tag}}
+          <label class="form-check-label" for="{{ box.id_for_label }}">{{ box.choice_label }}</label>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+
+    <div class="row justify-content-around mt-4">
+      <div class="border rounded p-2">
+        <label for="bias_id" class="form-label small font-weight-bold">Low bias</label>
+        <input type="range" name="bias" id="bias_id" class="form-range" min="0" max="100" step="1" value="50">
+        <label for="bias_id" class="form-label small font-weight-bold">High bias</label>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col">
+        <button type="submit" class="btn btn-primary">Publish post</button>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+{% endblock %}

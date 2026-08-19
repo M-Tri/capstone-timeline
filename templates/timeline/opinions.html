@@ -2,42 +2,29 @@
 
 {% block body %}
 
-
 <div class="container">
   <div class="row justify-content-around">
     <div class="col-4 mt-4">
       <div class="card text-white bg-dark border-light mb-3 p-2 Larger shadow">
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-          <p class="card-text">This is a longe is a longe is a longe is a longe is a longe is a longe is a longe is a
-            longer card with supporting text below as a natural lead-in to additional
-            content. This content is a little bit longer.</p>
+          <h5 class="card-title">{{form.title}}</h5>
+          <h6 class="card-subtitle mb-2 text-body-secondary">{{form.writer.username}}</h6>
+          <p class="card-text">{{form.content}}</p>
         </div>
+
         <div class="d-flex justify-content-center align-items-center">
           <span class="border p-1 Larger shadow rounded">hello1</span>
           <span class="border p-1 ml-1 Larger shadow rounded">hello2</span>
           <span class="border p-1 ml-1 Larger shadow rounded">hello2</span>
         </div>
-        <!-- <div class="row justify-content-around mt-4">
-          <div class="bg-warning border rounded">
-            <div>
-              <label for="customRange1" class="form-label">Low bias</label>
-              <label for="customRange1" class="form-label">Hight bias</label>
-            </div>
-            <div class="row justify-content-around mt-2">
-              <input type="range" class="form-range" id="disabledRange" disabled>
-            </div>
-          </div>
 
-        </div> -->
         <div class="d-flex justify-content-center align-items-center mt-2">
           <label>Bias Level</label>
         </div>
         <div class="d-flex justify-content-center align-items-center">
           <div class="progress w-50 ">
             <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 100%"
-              aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+              aria-valuenow="{{form.bias}}" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
         </div>
 

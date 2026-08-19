@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="100%" height="100%" style="background-color: #030002;">
+  <defs>
+    <!-- Intense Cyber Glow Filter -->
+    <filter id="matrix-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur1" />
+      <feGaussianBlur stdDeviation="3" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur1" />
+        <feMergeNode in="blur2" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Subtle HUD Glow -->
+    <filter id="soft-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Grid Pattern -->
+    <pattern id="cyber-grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#ff0033" stroke-width="0.5" opacity="0.08"/>
+    </pattern>
+
+    <!-- Vignette Background Gradient -->
+    <radialGradient id="vignette-bg" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#220008" stop-opacity="0.5"/>
+      <stop offset="50%" stop-color="#0a0003" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#020001" stop-opacity="1"/>
+    </radialGradient>
+
+    <!-- Timeline Arrow Marker -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ff0033" />
+    </marker>
+  </defs>
+
+  <!-- Dark Background Vignette Layer -->
+  <rect width="100%" height="100%" fill="url(#vignette-bg)" />
+
+  <!-- Cyber Grid Layer -->
+  <rect width="100%" height="100%" fill="url(#cyber-grid)" />
+
+  <!-- Matrix Digital Rain Background Elements -->
+  <g fill="#ff0033" opacity="0.13" font-family="monospace" font-size="13" letter-spacing="2">
+    <text x="100" y="120">010101 1990 T E M P O R A L</text>
+    <text x="100" y="140">101100 2008 A C C E S S</text>
+    <text x="100" y="160">110011 2012 D A T A</text>
+    <text x="400" y="80">SYSTEM.INIT Timeline_V2</text>
+    <text x="400" y="100">010010 1993 010101 2018</text>
+    <text x="850" y="150">1453_LOOP_CORRUPTED</text>
+    <text x="850" y="170">2077_OVERWRITE_DETECTED</text>
+    <text x="1350" y="110">01101 2021 11001</text>
+    <text x="1350" y="130">00110 1998 00101</text>
+    <text x="200" y="900">010101010101010101</text>
+    <text x="600" y="950">101010101010101010</text>
+    <text x="1100" y="920">111000111000111000</text>
+    <text x="1500" y="960">000111000111000111</text>
+  </g>
+
+  <!-- HUD Status Callouts -->
+  <g font-family="Consolas, 'Courier New', monospace" font-size="16" fill="#ff1a3c" letter-spacing="4" opacity="0.75" filter="url(#soft-glow)">
+    <text x="180" y="330">TEMPORAL INSTABILITY</text>
+    <text x="180" y="780">TEMPORAL INSTABILITY</text>
+    <text x="1180" y="860">UNAUTHORIZED TIMELINE ACCESS</text>
+  </g>
+
+  <!-- Tech Connecting Lines & Circuits -->
+  <g stroke="#ff0033" stroke-width="1" opacity="0.3" fill="none">
+    <path d="M 180 345 L 350 345 L 400 390" />
+    <path d="M 180 760 L 350 760 L 400 710" />
+    <path d="M 1180 840 L 1320 840 L 1380 750" />
+  </g>
+
+  <!-- Timeline Main Graphics Structure -->
+  <g filter="url(#matrix-glow)">
+    
+    <!-- Central Main Axis Line -->
+    <line x1="120" y1="540" x2="1750" y2="540" stroke="#ff0033" stroke-width="3.5" />
+
+    <!-- Left Main Arrow Head -->
+    <path d="M 220 480 L 110 540 L 220 600" fill="none" stroke="#ff2244" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+
+    <!-- Repeating Leftward Arrows Along Line -->
+    <path d="M 460 495 L 370 540 L 460 585" fill="none" stroke="#ff1a3c" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M 820 495 L 730 540 L 820 585" fill="none" stroke="#ff1a3c" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M 1180 495 L 1090 540 L 1180 585" fill="none" stroke="#ff1a3c" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M 1480 505 L 1400 540 L 1480 575" fill="none" stroke="#ff1a3c" stroke-width="4.5" stroke-linejoin="round"/>
+
+    <!-- Right Multi-Branching Arrows -->
+    <g fill="none" stroke="#ff2244" stroke-linejoin="round">
+      <!-- Upper Branch -->
+      <path d="M 1520 490 L 1780 440" stroke-width="4.5"/>
+      <path d="M 1720 425 L 1795 440 L 1730 465" stroke-width="4.5"/>
+
+      <!-- Center Main Branch -->
+      <path d="M 1510 540 L 1820 540" stroke-width="6"/>
+      <path d="M 1750 510 L 1835 540 L 1750 570" stroke-width="6"/>
+
+      <!-- Lower Branch -->
+      <path d="M 1520 590 L 1780 640" stroke-width="4.5"/>
+      <path d="M 1730 615 L 1795 640 L 1720 655" stroke-width="4.5"/>
+    </g>
+
+    <!-- Glowing Nodes at Intersections -->
+    <circle cx="370" cy="540" r="5" fill="#ffffff" />
+    <circle cx="730" cy="540" r="5" fill="#ffffff" />
+    <circle cx="1090" cy="540" r="5" fill="#ffffff" />
+    <circle cx="1400" cy="540" r="5" fill="#ffffff" />
+    <circle cx="1795" cy="440" r="4" fill="#ffffff" />
+    <circle cx="1835" cy="540" r="5" fill="#ffffff" />
+    <circle cx="1795" cy="640" r="4" fill="#ffffff" />
+  </g>
+
+  <!-- Timeline Numbers (1990+) -->
+  <g font-family="'Consolas', 'Courier New', monospace" font-weight="900" font-size="64" fill="#ff3355" text-anchor="middle" filter="url(#matrix-glow)">
+    <!-- Top Row Years -->
+    <text x="300" y="460">1990</text>
+    <text x="640" y="460">2008</text>
+    <text x="980" y="460">2008</text>
+    <text x="1310" y="460">2015</text>
+    <text x="1570" y="450" font-size="52">2021</text>
+
+    <!-- Bottom Row Years -->
+    <text x="320" y="650">1993</text>
+    <text x="660" y="650">2012</text>
+    <text x="1000" y="650">2012</text>
+    <text x="1330" y="650">2018</text>
+    <text x="1600" y="660" font-size="52">1998</text>
+  </g>
+</svg>
