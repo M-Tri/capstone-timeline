@@ -1,0 +1,83 @@
+{% extends "timeline/layout.html" %}
+
+{% block body %}
+
+<div class="container mt-5">
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="row mt-4">
+            <div class="col">
+                <label for="post_title_id" class="form-label small font-weight-bold">Title</label>
+                <input type="text" name="title" id="post_title_id" class="form-control"
+                    value="{{ form.title.value|default:'' }}">
+            </div>
+
+            <div class="col">
+                <label for="post_author_name_id" class="form-label small font-weight-bold">Author Name</label>
+                <input type="text" name="author_name" id="post_author_name_id" class="form-control"
+                    value="{{ form.author_name.value|default:'' }}">
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                <label for="post_url_field_1_id" class="form-label small font-weight-bold">Main Image (Required)</label>
+                <input type="url" name="url_field_1" id="post_url_field_1_id" class="form-control"
+                    placeholder="https://example.com/image.svg" value="{{ form.url_field_1.value|default:'' }}">
+            </div>
+
+            <div class="col">
+                <label for="post_url_field_2_id" class="form-label small font-weight-bold">Image 2 (Optional)</label>
+                <input type="url" name="url_field_2" id="post_url_field_2_id" class="form-control"
+                    placeholder="https://example.com/image.svg" value="{{ form.url_field_2.value|default:'' }}">
+            </div>
+
+            <div class="col">
+                <label for="post_url_field_3_id" class="form-label small font-weight-bold">Image 3 (Optional)</label>
+                <input type="url" name="url_field_3" id="post_url_field_3_id" class="form-control"
+                    placeholder="https://example.com/image.svg" value="{{ form.url_field_3.value|default:'' }}">
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                <label for="post_content_id" class="form-label small font-weight-bold">Content</label>
+                <textarea name="content" id="post_content_id" row mt-4s="5" class="form-control"
+                    placeholder="Enter text...">{{ form.content.value|default:'' }}</textarea>
+            </div>
+        </div>
+
+
+        <div class="row mt-4">
+            <div class="col">
+                <label class="form-label small font-weight-bold">Popularity</label>
+                {% for radio in form.popularity %}
+                <div class="form-check">
+                    {{ radio.tag }}
+                    <label class="form-check-label" for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+
+        <div class="row mt-4">
+            <div class="col">
+                <label for="post_url_source_id" class="form-label small font-weight-bold">Source URL</label>
+                <input type="url" name="url_source" id="post_url_source_id" class="form-control"
+                    placeholder="https://example.com/source" value="{{ form.url_source.value|default:'' }}">
+            </div>
+        </div>
+
+
+        <div class="row mt-4">
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Publish post</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}
