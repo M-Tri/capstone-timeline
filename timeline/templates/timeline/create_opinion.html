@@ -8,13 +8,13 @@
 
     <div class="row mt-4">
       <div class="col">
-        <label for="post_title_id" class="form-label small font-weight-bold">Title</label>
+        <label for="post_title_id" class="form-label small font-weight-bold">Opinion Title</label>
         <input type="text" name="title" id="post_title_id" class="form-control"
           value="{{ form.title.value|default:'' }}">
       </div>
 
       <div class="col">
-        <label for="post_author_name_id" class="form-label small font-weight-bold">Author Name</label>
+        <label for="post_author_name_id" class="form-label small font-weight-bold">Opinion Author Name</label>
         <input type="text" name="author_name" id="post_author_name_id" class="form-control"
           value="{{ form.author_name.value|default:'' }}">
       </div>
@@ -23,7 +23,7 @@
 
     <div class="row mt-4">
       <div class="col">
-        <label for="post_content_id" class="form-label small font-weight-bold">Content</label>
+        <label for="post_content_id" class="form-label small font-weight-bold">Opinion Content</label>
         <textarea name="content" id="post_content_id" row mt-4s="5" class="form-control"
           placeholder="Enter text...">{{ form.content.value|default:'' }}</textarea>
       </div>
@@ -50,6 +50,24 @@
         <label for="bias_id" class="form-label small font-weight-bold">High bias</label>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col">
+        <label for="{{ form.article.id_for_label }}" class="form-label">
+          Select Article
+        </label>
+
+        <input type="text" name="article" list="article-datalist" required id="{{ form.article.id_for_label }}"
+          class="form-control" placeholder="Search for an article...">
+
+        <datalist id="article-datalist">
+          {% for article in articles %}
+          <option value="{{ article.id }}">{{ article.title }}</option>
+          {% endfor %}
+        </datalist>
+      </div>
+    </div>
+
 
     <div class="row mt-4">
       <div class="col">

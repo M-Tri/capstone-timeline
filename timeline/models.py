@@ -39,6 +39,7 @@ class Opinion(models.Model):
         on_delete = models.CASCADE,
         related_name = 'opinions_to_this_user',
     )
+    # Related article
     article = models.ForeignKey(
         Article,
         on_delete = models.CASCADE,
@@ -46,7 +47,7 @@ class Opinion(models.Model):
     )
 
     content = models.CharField(max_length=255)
-    post_creation_time = models.DateTimeField()
+    post_creation_time = models.DateTimeField(auto_now_add=True)
     views = models.ManyToManyField(
         User,
         related_name = 'opinion_viewers',

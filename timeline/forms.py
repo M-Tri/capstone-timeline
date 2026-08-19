@@ -1,5 +1,5 @@
 from django import forms
-from .models import Label
+from .models import Label, Opinion, Article
 
 POPULARITY = [
     ('High', 'High'),
@@ -37,18 +37,20 @@ class PostOpinion(forms.Form):
         widget=forms.Textarea(), 
     )
     labels_select = forms.ModelMultipleChoiceField(
-        queryset=None,
+        queryset=Label.objects.none(),
         widget=forms.CheckboxSelectMultiple,
+        label="labels",
         )
     bias = forms.IntegerField()
-    opinion = forms.ModelChoiceField(
-    queryset=Opinion.objects.none(),
-    widget=forms.TextInput(attrs={'list': 'opinion-datalist'}),
-    required=True,
-    )
     
+    article = forms.ModelChoiceField(
+        queryset=Article.objects.none(),
+        widget=forms.TextInput(attrs={'list': 'opinion-datalist'}),
+        required=True,
+    )
+
     # Extract labels dynamically when form is created rather than when class is defined.
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["labels_select"].queryset = Label.objects.all()
-        self.fields["opinion"].queryset = Opinion.objects.all()
+        self.fields["article"].queryset = Article.objects.all()

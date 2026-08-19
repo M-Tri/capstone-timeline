@@ -9,7 +9,7 @@ from django.utils import timezone
 from django.core.paginator import Paginator
 import json
 from django.http import JsonResponse
-from .models import User, Article, Image, Supervise
+from .models import User, Article, Image, Supervise, Opinion
 
 
 def index(request):
@@ -18,9 +18,17 @@ def index(request):
         'article': article,
     })
 
-def opinions(request):
-    return render(request, "timeline/opinions.html")
+def display_all_opinions(request):
+    opinions = Opinions.objects.all()
+    return render(request, "timeline/opinions.html",{
+        'opinions': opinions,
+    })
 
+def display_specific_opinions(request, ):
+    opinions = Opinions.objects.all()
+    return render(request, "timeline/opinions.html",{
+        'opinions': opinions,
+    })
 def create_post(request):
     if request.method == 'POST':
         form = PostNews(request.POST)
@@ -60,32 +68,38 @@ def create_post(request):
     
     return render(request, 'timeline/create_post.html', {'form': form})
 
-# Extract info from form and create an opinion.
-# After : Connect opinions to related button opiniono in post
+
 def create_opinion(request):
+    # Rendered for article selection suggestive search
+    articles = Article.objects.all()
+    
     if request.method == 'POST':
         form = PostOpinion(request.POST)
         
         if form.is_valid():
             form_data = form.cleaned_data
-            
-            article_id = form_data['article_id']
-            related_article = Article.objects.get(article_id)
 
             new_opinion = Opinion(
                 writer=request.user,
                 title=form_data['title'],
-                author_name=form_data['author_name'],
+                article=form_data['article'],
                 content=form_data['content'],
-                popularity=form_data['popularity'],
-                url_source=form_data['url_source']
+                bias=form_data['bias'],
             )
+            new_opinion.save()
+            
+            # Create label object connections
+            selected_labels = form_data['labels_select']
+            new_opinion.labels.set(selected_labels)
 
             return redirect(reverse('index'))
     else:
         form = PostOpinion()
-        
-    return render(request, 'timeline/create_opinion.html', {'form': form})
+      
+    return render(request, 'timeline/create_opinion.html', {
+        'form': form,
+        'articles': articles,
+        })
 
 
 def login_view(request):
