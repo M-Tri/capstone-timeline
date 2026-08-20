@@ -1,6 +1,6 @@
 {% if article %}
 <div class="vw-100 vh-100 d-flex justify-content-center align-items-center">
-    <div class="card" style="width: 24rem;">
+    <div class="card" style="width: 30rem;">
         
         
         <div id="articleCarousel" class="carousel slide card-img-top" data-ride="carousel">
@@ -41,13 +41,12 @@
         
         
         <div class="card-body overflow-auto" style="max-height: 250px;">
-            <h5 class="card-title">{{ article.title }}</h5>
+            <h5 class="card-title"><strong>{{ article.title }}</strong></h5>
             <p class="card-text">{{ article.content }}</p>
         </div>
         
         
         <ul class="list-group list-group-flush">
-            <li class="list-group-item"><strong>Title:</strong> {{ article.title }}</li>
             <li class="list-group-item">
               Views: {{ article.views.count }}
             </li>
@@ -64,8 +63,17 @@
         
        
         <div class="card-body  d-flex justify-content-around">
-            <a href="#" class="btn btn-primary btn-sm">Opinions</a>
-            <a href="#" class="btn btn-primary btn-sm">Random</a>
+            <form method="POST" action="{% url 'specific_opinions' %}">
+                {% csrf_token %}
+                <input type="hidden" name="article_id" value="{{ article.id }}">
+                <button type="submit" class="btn btn-primary btn-sm">Opinions</button>
+            </form>
+
+            <form method="POST" action="{% url 'random_post' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary btn-sm">Random</button>
+            </form>
+
         </div>
         
     </div>

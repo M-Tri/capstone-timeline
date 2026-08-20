@@ -10,7 +10,7 @@ POPULARITY = [
 class PostNews(forms.Form):
     title = forms.CharField(max_length=100)
     author_name = forms.CharField(max_length=100)
-    original_post = forms.URLField(
+    url_field_1 = forms.URLField(
         label="Main Image", 
     )
     url_field_2 = forms.URLField(

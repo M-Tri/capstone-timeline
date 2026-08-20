@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from .models import User, Article, Image, Supervise, Opinion
 from .forms import PostNews, PostOpinion
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
@@ -9,7 +11,7 @@ from django.utils import timezone
 from django.core.paginator import Paginator
 import json
 from django.http import JsonResponse
-from .models import User, Article, Image, Supervise, Opinion
+
 
 
 def index(request):
@@ -19,16 +21,25 @@ def index(request):
     })
 
 def display_all_opinions(request):
-    opinions = Opinions.objects.all()
+    opinions = Opinion.objects.all()
     return render(request, "timeline/opinions.html",{
         'opinions': opinions,
     })
 
-def display_specific_opinions(request, ):
-    opinions = Opinions.objects.all()
+def display_specific_opinions(request):
+    article_id = request.POST.get("article_id")
+    article = Article.objects.get(id=article_id)
+    opinions = article.opinions_to_this_article.all()
     return render(request, "timeline/opinions.html",{
         'opinions': opinions,
     })
+
+def random_post(request):
+    article = Article.objects.order_by('?').first()
+    return render(request, 'timeline/index.html', {
+        'article': article,
+    })
+@login_required(login_url='login')    
 def create_post(request):
     if request.method == 'POST':
         form = PostNews(request.POST)
@@ -44,7 +55,15 @@ def create_post(request):
                 popularity=form_data['popularity'],
                 url_source=form_data['url_source']
             )
-            main_image.save()
+            new_post.save()
+            
+            if form_data['url_field_1']:
+                image_1 = Image(
+                    article=new_post,
+                    url=form_data['url_field_1'],
+                    is_main_image=True
+                )
+                image_1.save()
             
             if form_data['url_field_2']:
                 image_2 = Image(
@@ -63,12 +82,18 @@ def create_post(request):
                 image_3.save()
 
             return redirect(reverse('index'))
+        else:
+            # 👇 DEBUG: Print or log the errors
+            print("Form errors:", form.errors)
+            print("Form data:", request.POST)
+            print("User:", request.user)
+        
+        
     else:
         form = PostNews()
     
     return render(request, 'timeline/create_post.html', {'form': form})
-
-
+@login_required(login_url='login')
 def create_opinion(request):
     # Rendered for article selection suggestive search
     articles = Article.objects.all()
@@ -92,7 +117,7 @@ def create_opinion(request):
             selected_labels = form_data['labels_select']
             new_opinion.labels.set(selected_labels)
 
-            return redirect(reverse('index'))
+            return redirect(reverse('opinions'))
     else:
         form = PostOpinion()
       
@@ -100,7 +125,6 @@ def create_opinion(request):
         'form': form,
         'articles': articles,
         })
-
 
 def login_view(request):
     if request.method == "POST":
@@ -120,12 +144,10 @@ def login_view(request):
             })
     else:
         return render(request, "timeline/login.html")
-
-
+@login_required(login_url='login')
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("index"))
-
 
 def register(request):
     if request.method == "POST":
