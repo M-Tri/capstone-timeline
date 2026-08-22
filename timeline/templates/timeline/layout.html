@@ -20,7 +20,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav">
         <li class="nav-item active">
           <a class="nav-link" href="{% url 'index' %}"> Home <span class="sr-only">(current)</span></a>
         </li>
@@ -37,7 +37,6 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
         </li>
-
         {% else %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'login' %}">Log In</a>
@@ -58,6 +57,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha256-OUFW7hFO0/r5aEGTQOz9F/aXQOt+TwqI1Z4fbVvww04=" crossorigin="anonymous"></script>
+    <script src="{% static 'timeline/index.js' %}"></script>
 </body>
 
 </html>
