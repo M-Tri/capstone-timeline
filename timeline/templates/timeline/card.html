@@ -1,81 +1,105 @@
 {% if article %}
 <div class="vw-100 vh-100 d-flex justify-content-center align-items-center">
-    <div class="card" style="width: 30rem;">
-        
-        
-        <div id="articleCarousel" class="carousel slide card-img-top" data-ride="carousel">
-            
-            
-            <ol class="carousel-indicators">
-                {% for image in article.images.all %}
-                    <li data-target="#articleCarousel" data-slide-to="{{ forloop.counter0 }}" 
-                        {% if forloop.first %}class="active"{% endif %}></li>
-                {% empty %}
-                    <li data-target="#articleCarousel" data-slide-to="0" class="active"></li>
-                {% endfor %}
-            </ol>
-            
-            
-            <div class="carousel-inner">
-                {% for image in article.images.all %}
-                    <div class="carousel-item {% if forloop.first %} active {% endif %}">
-                        <img src="{{ image.url }}" class="d-block w-100">
+    <div class="row justify-content-center w-100">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card border-light">
+                <div id="articleCarousel" class="carousel slide card-img-top" data-ride="carousel">
+
+
+                    <ol class="carousel-indicators">
+                        {% for image in article.images.all %}
+                        <li data-target="#articleCarousel" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></li>
+                        {% empty %}
+                        <li data-target="#articleCarousel" data-slide-to="0" class="active"></li>
+                        {% endfor %}
+                    </ol>
+
+
+                    <div class="carousel-inner">
+                        {% for image in article.images.all %}
+                        <div class="carousel-item {% if forloop.first %} active {% endif %}"
+                            style="height: 250px; background: #ffffff;">
+                            <img src="{{ image.url }}" class="d-block h-100 rounded"
+                                style="object-fit: contain; margin: 0 auto;" alt="Image">
+                        </div>
+                        {% empty %}
+                        <div class="carousel-item active">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/No_Image_Available.jpg/250px-No_Image_Available.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail"
+                                class="d-block w-100">
+                        </div>
+                        {% endfor %}
                     </div>
-                {% empty %}
-                    <div class="carousel-item active">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/No_Image_Available.jpg/250px-No_Image_Available.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail" class="d-block w-100" >
-                    </div>
-                {% endfor %}
+
+
+                    <a class="carousel-control-prev" href="#articleCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#articleCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+
+
+                <div class="card-body overflow-auto" style="max-height: 250px;">
+                    <h5 class="card-title"><strong>{{ article.title }}</strong></h5>
+                    <p class="card-text">{{ article.content }}</p>
+                </div>
+
+
+                <ul class="list-group list-group-flush">
+                    <!-- <li class="list-group-item">
+                        
+                    </li> -->
+                    <li class="list-group-item mt-2">
+                        <div class="d-flex justify-content-around">
+                            <div class=" bg-dark text-white rounded-pill px-2 py-2 d-inline-block border border-warning">
+                                <span class="small"><strong>Popular:</strong> {{ article.popularity }}</span>
+                            </div>
+                            <div class="bg-dark text-white rounded-pill px-2 py-2 d-inline-block border border-sucess">
+                                 <span class="small"><strong>Views:</strong> {{ article.views.count }}</span>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-around">
+                            <div class="bg-dark text-white rounded-pill px-2 py-2 d-inline-block border border-warning">
+                                <span class="small"><a href="{{ article.url_source }}">Source URL</a></span>
+                                
+                            </div>
+                            <div class="bg-dark text-white rounded-pill px-2 py-2 d-inline-block border border-success">
+                                <span class="small">{{ article.post_creation_time|date:"F d, Y" }}</span>
+                                
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+
+                <div class="card-body  d-flex justify-content-around">
+                    <form method="POST" action="{% url 'specific_opinions' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="article_id" value="{{ article.id }}">
+                        <button type="submit" class="btn btn-success btn-md border border-warning">Opinions</button>
+                    </form>
+
+
+
+
+                    <form method="POST" action="{% url 'random_post' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-warning btn-md border border-success">Random</button>
+                    </form>
+
+
+                    
+                </div>
+
             </div>
-            
-            
-            <a class="carousel-control-prev" href="#articleCarousel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#articleCarousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
         </div>
-        
-        
-        <div class="card-body overflow-auto" style="max-height: 250px;">
-            <h5 class="card-title"><strong>{{ article.title }}</strong></h5>
-            <p class="card-text">{{ article.content }}</p>
-        </div>
-        
-        
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-              Views: {{ article.views.count }}
-            </li>
-            <li class="list-group-item">
-                <span>Popularity at the time: {{ article.popularity}}</span>
-            </li>
-            <li class="list-group-item">
-              <a href="{{ article.url_source }}" >Source URL</a>
-            </li>
-            <li class="list-group-item">
-                <span>Posted: {{ article.post_creation_time }}</span>
-            </li>
-        </ul>
-        
-       
-        <div class="card-body  d-flex justify-content-around">
-            <form method="POST" action="{% url 'specific_opinions' %}">
-                {% csrf_token %}
-                <input type="hidden" name="article_id" value="{{ article.id }}">
-                <button type="submit" class="btn btn-primary btn-sm">Opinions</button>
-            </form>
 
-            <form method="POST" action="{% url 'random_post' %}">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-primary btn-sm">Random</button>
-            </form>
-
-        </div>
-        
     </div>
 </div>
 
