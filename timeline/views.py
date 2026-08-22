@@ -1,3 +1,4 @@
+from .utils import add_viewers
 from django.contrib.auth.decorators import login_required
 from .models import User, Article, Image, Supervise, Opinion
 from .forms import PostNews, PostOpinion
@@ -16,12 +17,13 @@ from django.http import JsonResponse
 
 def index(request):
     article = Article.objects.all().order_by('-post_creation_time').first()
+    add_viewers(request.user, article.id)
     return render(request, 'timeline/index.html', {
         'article': article,
     })
 
 def display_all_opinions(request):
-    opinions = Opinion.objects.all()
+    opinions = Opinion.objects.all().order_by('-post_creation_time')
     return render(request, "timeline/opinions.html",{
         'opinions': opinions,
     })
@@ -29,16 +31,19 @@ def display_all_opinions(request):
 def display_specific_opinions(request):
     article_id = request.POST.get("article_id")
     article = Article.objects.get(id=article_id)
-    opinions = article.opinions_to_this_article.all()
+    opinions = article.opinions_to_this_article.all().order_by('-post_creation_time')
     return render(request, "timeline/opinions.html",{
         'opinions': opinions,
     })
 
 def random_post(request):
     article = Article.objects.order_by('?').first()
+    add_viewers(request.user, article.id)
     return render(request, 'timeline/index.html', {
         'article': article,
     })
+    
+
 @login_required(login_url='login')    
 def create_post(request):
     if request.method == 'POST':
@@ -81,17 +86,17 @@ def create_post(request):
                 )
                 image_3.save()
 
-            return redirect(reverse('index'))
-        else:
-            # 👇 DEBUG: Print or log the errors
-            print("Form errors:", form.errors)
-            print("Form data:", request.POST)
-            print("User:", request.user)
+            return redirect('index')
         
+        # If validation fails 👎
+        else:
+            print("Form validation error num 1 👎")
         
     else:
         form = PostNews()
-    
+        print("Form with 'Get', not 'POST' num 2 👎")
+        
+   
     return render(request, 'timeline/create_post.html', {'form': form})
 @login_required(login_url='login')
 def create_opinion(request):
@@ -117,7 +122,7 @@ def create_opinion(request):
             selected_labels = form_data['labels_select']
             new_opinion.labels.set(selected_labels)
 
-            return redirect(reverse('opinions'))
+            return redirect(reverse('all_opinions'))
     else:
         form = PostOpinion()
       
