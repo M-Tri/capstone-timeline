@@ -49,13 +49,4 @@ document.addEventListener('DOMContentLoaded', function() {
   if (btn_ADHD) {
     btn_ADHD.onclick = change_ADHD_state;
   }
-
-  // buttons : reported_opinions.html
-  const btn_remove = document.querySelector('#remove-reported-button');
-  if (btn_remove) {
-    const opinionId = btn_remove.dataset.opinionId;
-    document.querySelector('#remove-reported-opinion-id').addEventListener()
-    console.log(opinionId)
-  }
-  
 });
