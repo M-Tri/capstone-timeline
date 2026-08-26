@@ -96,8 +96,29 @@ def create_post(request):
         form = PostNews()
         print("Form with 'Get', not 'POST' num 2 👎")
         
-   
     return render(request, 'timeline/create_post.html', {'form': form})
+
+
+def report_opinion(request, opinion_id):
+    if request.method == 'POST':
+        opinion = Opinion.objects.get(pk=opinion_id)
+        opinion.reporter.add(request.user)
+    
+    return redirect('all_opinions')
+
+
+def reported_opinions(request):
+    reported_opinions = [] 
+    for opinion in Opinion.objects.all():
+        num_reports = opinion.reporter.count()
+        if (num_reports > 0):
+            reported_opinions.append(opinion)
+    print(reported_opinions)
+    return render(request, 'timeline/reported_opinions.html',  {
+        'reported_opinions' : reported_opinions,
+    })
+
+
 @login_required(login_url='login')
 def create_opinion(request):
     # Rendered for article selection suggestive search
@@ -149,6 +170,7 @@ def login_view(request):
             })
     else:
         return render(request, "timeline/login.html")
+
 @login_required(login_url='login')
 def logout_view(request):
     logout(request)

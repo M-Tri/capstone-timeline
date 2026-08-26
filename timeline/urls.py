@@ -11,4 +11,6 @@ urlpatterns = [
     path('create/post/', views.create_post, name="create_post"),
     path('create/opinion/', views.create_opinion, name="create_opinion"),
     path('random/post/', views.random_post, name="random_post"),
+    path('report/opinion/<str:opinion_id>/', views.report_opinion, name="report_opinion"),
+    path('reported/opinions/', views.reported_opinions, name="reported_opinions"),
 ]

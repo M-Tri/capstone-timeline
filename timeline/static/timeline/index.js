@@ -35,14 +35,27 @@ function change_ADHD_state() {
   document.querySelector('#opinion-button').disabled = true;
   document.querySelector('#random-button').disabled = true;
   // Change change_color
-  change_color()
+  change_color();
 
   counter = 0;
 
   timer_id = setInterval(count, 1000);
 };
 
+// Start
 document.addEventListener('DOMContentLoaded', function() {
-  document.querySelector('#ADHD-button').onclick = change_ADHD_state;
-  });
+  // ADHD button : card.html
+  const btn_ADHD = document.querySelector('#ADHD-button');
+  if (btn_ADHD) {
+    btn_ADHD.onclick = change_ADHD_state;
+  }
 
+  // buttons : reported_opinions.html
+  const btn_remove = document.querySelector('#remove-reported-button');
+  if (btn_remove) {
+    const opinionId = btn_remove.dataset.opinionId;
+    document.querySelector('#remove-reported-opinion-id').addEventListener()
+    console.log(opinionId)
+  }
+  
+});

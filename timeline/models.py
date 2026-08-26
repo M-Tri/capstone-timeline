@@ -52,6 +52,11 @@ class Opinion(models.Model):
         User,
         related_name = 'opinion_viewers',
         )
+    reporter = models.ManyToManyField(
+        User,
+        related_name = 'reporters_of_this_opinion',
+        blank=True,
+        )
     bias = models.IntegerField()
 
 

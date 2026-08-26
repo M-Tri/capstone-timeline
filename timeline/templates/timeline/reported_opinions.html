@@ -1,0 +1,37 @@
+{% extends "timeline/layout.html" %}
+
+{% block body %}
+<div class="container">
+  {% for opinion in reported_opinions %}
+  <div id="remove-reported-opinion-id" class="row bg-warning border p-2 mt-4">
+    <div class="col-12 col-sm-4">{{ opinion.title }}</div>
+    <div class="col-12 col-sm-4">{{ opinion.writer }}</div>
+    <div class="col-12 col-sm-4">
+      <button class="btn btn-sm btn-primary" 
+            data-toggle="collapse" 
+            data-target="#collapseOpinion{{ opinion.id }}" 
+            aria-expanded="false" 
+            aria-controls="collapseOpinion{{ opinion.id }}">
+        View Content
+    </button>
+      <button id="remove-reported-button" class="btn btn-sm bg-danger"
+        data-opinion-id="{{ opinion.id }}">Remove</button>
+      <button id="keep-button" class="btn btn-sm bg-success" data-opinion-id="{{ opinion.id }}">Keep</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="row">
+      <div class="col-12">
+        <div class="collapse" id="collapseOpinion{{ opinion.id }}">
+          <div class="card card-body">
+            {{ opinion.content }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+    <p>No reported opinions.</p>
+  {% endfor %}
+</div>
+{% endblock %}
