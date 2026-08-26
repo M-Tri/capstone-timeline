@@ -22,11 +22,13 @@ def index(request):
         'article': article,
     })
 
+
 def display_all_opinions(request):
     opinions = Opinion.objects.all().order_by('-post_creation_time')
     return render(request, "timeline/opinions.html",{
         'opinions': opinions,
     })
+
 
 def display_specific_opinions(request):
     article_id = request.POST.get("article_id")
@@ -36,12 +38,14 @@ def display_specific_opinions(request):
         'opinions': opinions,
     })
 
+
 def random_post(request):
     article = Article.objects.order_by('?').first()
     add_viewers(request.user, article.id)
     return render(request, 'timeline/index.html', {
         'article': article,
     })
+
 
 @login_required(login_url='login')    
 def create_post(request):
@@ -118,13 +122,20 @@ def reported_opinions(request):
     })
 
 
-
 def delete_opinion(request, opinion_id):
     # Delete the opinion from the database
     opinion = Opinion.objects.get(id=opinion_id)
     opinion.delete()
 
     return JsonResponse({'status': 'ok'})
+
+
+def keep_opinion(request, opinion_id):
+    opinion = Opinion.objects.get(id=opinion_id)
+    opinion.reporter.clear()
+
+    return JsonResponse({'status': 'ok'})
+
 
 @login_required(login_url='login')
 def create_opinion(request):
@@ -159,6 +170,7 @@ def create_opinion(request):
         'articles': articles,
         })
 
+
 def login_view(request):
     if request.method == "POST":
 
@@ -178,10 +190,12 @@ def login_view(request):
     else:
         return render(request, "timeline/login.html")
 
+
 @login_required(login_url='login')
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("index"))
+
 
 def register(request):
     if request.method == "POST":

@@ -4,7 +4,7 @@
 {% block body %}
 <div class="container">
   {% for opinion in reported_opinions %}
-  <div class="row bg-warning border p-2 mt-4 remove-reported-opinion-id">
+  <div class="row bg-warning border border-danger p-2 mt-4 remove-reported-opinion-id">
     <div class="col-12 col-sm-4">{{ opinion.title }}</div>
     <div class="col-12 col-sm-4">{{ opinion.writer }}</div>
     <div class="col-12 col-sm-4">
@@ -20,16 +20,15 @@
       <button id="keep-button" class="btn btn-sm bg-success" data-opinion-id="{{ opinion.id }}">Keep</button>
     </div>
   </div>
-  <div class="row">
+
     <div class="row">
-      <div class="col-12">
+      <div class="col-12 border bg-light">
         <div class="collapse" id="collapseOpinion{{ opinion.id }}">
           <div class="card card-body">
             {{ opinion.content }}
           </div>
         </div>
       </div>
-    </div>
   </div>
   {% empty %}
     <p>No reported opinions.</p>

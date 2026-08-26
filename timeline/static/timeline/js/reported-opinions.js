@@ -1,7 +1,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
+   // Remove opinion
   const buttons = document.querySelectorAll('.remove-reported-button');
-  // Remove opinion
   buttons.forEach(button => {
     button.addEventListener("click", function (e) {
       const opinionId = this.dataset.opinionId;
@@ -9,8 +9,17 @@ document.addEventListener('DOMContentLoaded', function() {
       delete_opinion(opinionId, parent_container);
     });
   });
-});
 
+  // Keep opinion
+  document.querySelectorAll('#keep-button').forEach(button => {
+    button.addEventListener('click', function(e) {
+      const opinionId = this.dataset.opinionId;
+      const container = this.closest('.remove-reported-opinion-id');
+      keep_opinion(opinionId, container);
+    });
+  });
+
+});
 
 function delete_opinion(opinion_id, container) {
   // Add animation class
@@ -34,6 +43,27 @@ function delete_opinion(opinion_id, container) {
   });
 }
 
+function keep_opinion(opinion_id, container) {
+  // Add animation class
+  if (container) {
+    container.style.animationPlayState = 'running';
+
+    // Delete post from the browser
+    container.addEventListener('animationend', function() {
+      container.remove(); 
+    },{ once: true });
+  }
+
+  // Delete from the backend
+  const csrftoken = getCookie('csrftoken');
+  fetch('/keep/opinion/' + opinion_id + '/', {
+    method: 'POST',
+    headers: {
+      'X-CSRFToken': csrftoken,
+    }
+    //...
+  });
+}
 
 function getCookie(name) {
     let cookieValue = null;

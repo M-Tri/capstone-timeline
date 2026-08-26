@@ -14,4 +14,5 @@ urlpatterns = [
     path('report/opinion/<str:opinion_id>/', views.report_opinion, name="report_opinion"),
     path('reported/opinions/', views.reported_opinions, name="reported_opinions"),
     path('delete/opinion/<str:opinion_id>/', views.delete_opinion, name="delete_opinion"),
+    path('keep/opinion/<str:opinion_id>/', views.keep_opinion, name="keep_opinion"),
 ]
