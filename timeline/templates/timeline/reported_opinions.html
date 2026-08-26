@@ -1,9 +1,10 @@
 {% extends "timeline/layout.html" %}
+{% load static %}
 
 {% block body %}
 <div class="container">
   {% for opinion in reported_opinions %}
-  <div id="remove-reported-opinion-id" class="row bg-warning border p-2 mt-4">
+  <div class="row bg-warning border p-2 mt-4 remove-reported-opinion-id">
     <div class="col-12 col-sm-4">{{ opinion.title }}</div>
     <div class="col-12 col-sm-4">{{ opinion.writer }}</div>
     <div class="col-12 col-sm-4">
@@ -14,7 +15,7 @@
             aria-controls="collapseOpinion{{ opinion.id }}">
         View Content
     </button>
-      <button id="remove-reported-button" class="btn btn-sm bg-danger"
+      <button class="btn btn-sm bg-danger remove-reported-button"
         data-opinion-id="{{ opinion.id }}">Remove</button>
       <button id="keep-button" class="btn btn-sm bg-success" data-opinion-id="{{ opinion.id }}">Keep</button>
     </div>
@@ -34,4 +35,6 @@
     <p>No reported opinions.</p>
   {% endfor %}
 </div>
+
+<script src="{% static 'timeline/js/reported-opinions.js' %}"></script>
 {% endblock %}

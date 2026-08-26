@@ -42,7 +42,6 @@ def random_post(request):
     return render(request, 'timeline/index.html', {
         'article': article,
     })
-    
 
 @login_required(login_url='login')    
 def create_post(request):
@@ -118,6 +117,14 @@ def reported_opinions(request):
         'reported_opinions' : reported_opinions,
     })
 
+
+
+def delete_opinion(request, opinion_id):
+    # Delete the opinion from the database
+    opinion = Opinion.objects.get(id=opinion_id)
+    opinion.delete()
+
+    return JsonResponse({'status': 'ok'})
 
 @login_required(login_url='login')
 def create_opinion(request):
