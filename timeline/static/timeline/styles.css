@@ -3,6 +3,7 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* logo */
 #logo {
   background-image: url('./images/logo_time.svg'); 
   width: 50px; 
@@ -12,6 +13,7 @@
 }
 
 
+/* Remove reported opinions */
 @keyframes hide {
   0% {
     opacity: 1;
@@ -22,7 +24,6 @@
     transform: scale(0.80);
   }
 }
-
 
 .remove-reported-opinion-id { 
   animation-name: hide;
