@@ -6,12 +6,12 @@
 <div class="container">
   {% for opinion in opinions %}
   <div class="row justify-content-around">
-    <div class="col-12 col-md-10 col-lg-10">
+    <div class="col-12 col-md-10 col-lg-9">
       <div class="card border-warning mb-4 p-4 rounded shadow-lg">
         <div class="card-body">
           <div class="d-flex">
-            <h5 class="card-title border border-warning p-1 rounded-pill">{{opinion.title}} </h5>
-            <span class="ml-auto">
+            <h5 class="card-title rounded rounded-pill" style="{% if opinion.bias < 40 %}background-color: rgb(212, 237, 218);{% elif opinion.bias < 70 %}background-color: rgb(255, 243, 205);{% else %}background-color: rgb(250, 218, 221);{% endif %}"><strong class="roboto-bold">{{opinion.title}}</strong></h5>
+              <span class="ml-auto">
               <form method="POST" action="{% url 'report_opinion' opinion_id=opinion.id %}">
               {% csrf_token %}
               {% if request.user in opinion.reporter.all %}
@@ -26,8 +26,12 @@
               </form>
             </span>
           </div>
-          <h6 class="card-subtitle mb-2 text-body-secondary">{{opinion.writer.username}}</h6>
-          <p class="card-text">{{opinion.content}}</p>
+          <h6 class="card-subtitle mb-2 text-body-secondary">
+            <span class="rounded-pill roboto-light" style="background-color: rgb(251, 244, 236);">
+              {{opinion.writer.username}}
+            </span>
+          </h6>
+          <p class="card-text rounded p-2 border border-warning roboto-regular" style="background-color: rgba(255, 254, 252, 0.983);">{{opinion.content}}</p>
         </div>
 
         {% for label in opinion.labels.all %}
