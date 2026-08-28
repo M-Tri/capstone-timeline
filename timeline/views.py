@@ -49,6 +49,8 @@ def random_post(request):
 
 @login_required(login_url='login')    
 def create_post(request):
+    if not request.user.is_editor:
+        raise PermissionDenied
     if request.method == 'POST':
         form = PostNews(request.POST)
         
@@ -109,8 +111,10 @@ def report_opinion(request, opinion_id):
     
     return redirect('all_opinions')
 
-
+@login_required(login_url='login') 
 def reported_opinions(request):
+    if not request.user.is_editor:
+        raise PermissionDenied
     reported_opinions = [] 
     for opinion in Opinion.objects.all():
         num_reports = opinion.reporter.count()
@@ -121,16 +125,20 @@ def reported_opinions(request):
         'reported_opinions' : reported_opinions,
     })
 
-
+@login_required(login_url='login') 
 def delete_opinion(request, opinion_id):
+    if not request.user.is_editor:
+        raise PermissionDenied
     # Delete the opinion from the database
     opinion = Opinion.objects.get(id=opinion_id)
     opinion.delete()
 
     return JsonResponse({'status': 'ok'})
 
-
+@login_required(login_url='login') 
 def keep_opinion(request, opinion_id):
+    if not request.user.is_editor:
+        raise PermissionDenied
     opinion = Opinion.objects.get(id=opinion_id)
     opinion.reporter.clear()
 
