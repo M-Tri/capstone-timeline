@@ -4,6 +4,7 @@ from django.db import models
 # Create your models here.
 class User(AbstractUser):
     id = models.AutoField(primary_key=True)
+    is_editor = models.BooleanField(default=False)
     pass
 
 

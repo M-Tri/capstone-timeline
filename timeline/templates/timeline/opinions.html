@@ -10,7 +10,7 @@
       <div class="card border-warning mb-4 p-4 rounded shadow-lg">
         <div class="card-body">
           <div class="d-flex">
-            <h5 class="card-title border border-warning p-1 rounded">{{opinion.title}} </h5>
+            <h5 class="card-title border border-warning p-1 rounded-pill">{{opinion.title}} </h5>
             <span class="ml-auto">
               <form method="POST" action="{% url 'report_opinion' opinion_id=opinion.id %}">
               {% csrf_token %}

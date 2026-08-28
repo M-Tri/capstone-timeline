@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <nav class="navbar sticky-top  navbar-expand-lg navbar-light bg-white">
+  <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white">
     <a id="logo" class="text-hide navbar-brand">TimeLine</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,17 +29,20 @@
           <a class="nav-link" href="{% url 'all_opinions' %}">Opinions</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'create_post' %}">Create Post</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="{% url 'create_opinion' %}">Create Opinion</a>
+        </li>
+        {% if user.is_authenticated and user.is_editor %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'create_post' %}">Create Post</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'reported_opinions' %}">Reported</a>
         </li>
+        {% endif %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
         </li>
+        
         {% else %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'login' %}">Log In</a>
@@ -49,6 +52,29 @@
         </li>
         {% endif %}
       </ul>
+<Div class="d-flex flex-grow-1 align-items-center pr-3">
+   <span class="flex-grow-1 bd-highlight"><!--placeholder--></span> 
+  
+  <span class="btn rounded-pill d-none d-md-inline-block">
+    {% if user.is_authenticated and user.is_editor %}
+      <span class="p-2 rounded-pill" style="background-color:rgb(213, 194, 231)">
+        {{user.username}}
+      </span>
+      <span class="p-2 rounded-pill" style="background-color:rgb(194, 231, 218)">
+        @
+      </span>
+      <strong class="p-2 rounded-pill" style="background-color:rgb(231, 194, 231)">Editor</strong>
+    {% else %}
+      <span class="p-2 rounded-pill" style="background-color:rgb(213, 194, 231)">
+        {{user.username}}
+      </span>
+      <span class="p-2 rounded-pill" style="background-color:rgb(194, 231, 218)">
+        @
+      </span>
+      <strong class="p-2 rounded-pill" style="background-color:rgb(196, 220, 236)">User</strong>
+    {% endif %}
+  </span>
+</Div>
     </div>
   </nav>
   <div class="body">

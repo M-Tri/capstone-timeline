@@ -4,7 +4,8 @@
 {% block body %}
 <div class="container">
   {% for opinion in reported_opinions %}
-  <div class="row bg-warning border border-danger p-2 mt-4 remove-reported-opinion-id">
+  <div class="remove-reported-opinion-id" data-opinion-id="{{ opinion.id }}">
+    <div class="row bg-warning border border-danger p-2 mt-4">
     <div class="col-12 col-sm-4">{{ opinion.title }}</div>
     <div class="col-12 col-sm-4">{{ opinion.writer }}</div>
     <div class="col-12 col-sm-4">
@@ -29,6 +30,7 @@
           </div>
         </div>
       </div>
+  </div>
   </div>
   {% empty %}
     <p>No reported opinions.</p>
