@@ -17,7 +17,8 @@ from django.http import JsonResponse
 
 def index(request):
     article = Article.objects.all().order_by('-post_creation_time').first()
-    add_viewers(request.user, article.id)
+    if article and request.user.is_authenticated:
+        add_viewers(request.user, article.id)
     return render(request, 'timeline/index.html', {
         'article': article,
     })
@@ -41,7 +42,8 @@ def display_specific_opinions(request):
 
 def random_post(request):
     article = Article.objects.order_by('?').first()
-    add_viewers(request.user, article.id)
+    if article and request.user.is_authenticated:
+        add_viewers(request.user, article.id)
     return render(request, 'timeline/index.html', {
         'article': article,
     })
@@ -197,19 +199,16 @@ def get_quiz_api(request):
 
 def login_view(request):
     if request.method == "POST":
-
-        # Attempt to sign user in
         username = request.POST["username"]
-        password = request.POST["password"]
-        user = authenticate(request, username=username, password=password)
+        mypassword = request.POST["mypassword"]
+        user = authenticate(request, username=username, password=mypassword)
 
-        # Check if authentication successful
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("index"))
+            return redirect("index")
         else:
             return render(request, "timeline/login.html", {
-                "message": "Invalid username and/or password."
+            "message": "Invalid username and/or password."
             })
     else:
         return render(request, "timeline/login.html")
@@ -218,31 +217,26 @@ def login_view(request):
 @login_required(login_url='login')
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect(reverse("index"))
+    return redirect("index")
 
 
 def register(request):
     if request.method == "POST":
         username = request.POST["username"]
-        email = request.POST["email"]
-
-        # Ensure password matches confirmation
-        password = request.POST["password"]
-        confirmation = request.POST["confirmation"]
-        if password != confirmation:
+        mypassword = request.POST["mypassword"]
+        myconfirmation = request.POST["myconfirmation"]
+        if mypassword != myconfirmation:
             return render(request, "timeline/register.html", {
-                "message": "Passwords must match."
+            "message": "Passwords do not match."
             })
 
-        # Attempt to create new user
-        try:
-            user = User.objects.create_user(username, email, password)
-            user.save()
-        except IntegrityError:
+        if User.objects.filter(username=username).exists():
             return render(request, "timeline/register.html", {
-                "message": "Username already taken."
+            "message": "Username already exists."
             })
+        user = User.objects.create_user(username, password=mypassword)
+        user.save()
         login(request, user)
-        return HttpResponseRedirect(reverse("index"))
+        return redirect("index")
     else:
         return render(request, "timeline/register.html")
