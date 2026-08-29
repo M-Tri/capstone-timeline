@@ -1,6 +1,6 @@
 from .utils import add_viewers
 from django.contrib.auth.decorators import login_required
-from .models import User, Article, Image, Supervise, Opinion
+from .models import User, Article, Image, Opinion, Quiz
 from .forms import PostNews, PostOpinion
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
@@ -177,6 +177,22 @@ def create_opinion(request):
         'form': form,
         'articles': articles,
         })
+
+
+def game(request):
+    quiz = Quiz.objects.order_by('?').first()
+    return render(request, "timeline/game.html", {
+        "quiz" : quiz,
+    })
+
+
+def get_quiz_api(request):
+    quiz = Quiz.objects.order_by('?').first()
+    return JsonResponse({
+        'id': quiz.id,
+        'question': quiz.question,
+        'answer': quiz.answer
+    })
 
 
 def login_view(request):

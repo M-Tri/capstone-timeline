@@ -15,4 +15,6 @@ urlpatterns = [
     path('reported/opinions/', views.reported_opinions, name="reported_opinions"),
     path('delete/opinion/<str:opinion_id>/', views.delete_opinion, name="delete_opinion"),
     path('keep/opinion/<str:opinion_id>/', views.keep_opinion, name="keep_opinion"),
+    path('game/', views.game, name="game"),
+    path('get/quiz/api/', views.get_quiz_api, name='get_quiz_api'),
 ]

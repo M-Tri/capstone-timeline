@@ -32,6 +32,9 @@
           <a class="nav-link" href="{% url 'all_opinions' %}">Opinions</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="{% url 'game' %}">Quiz</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="{% url 'create_opinion' %}">Create Opinion</a>
         </li>
         {% if user.is_authenticated and user.is_editor %}

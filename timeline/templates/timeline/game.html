@@ -1,0 +1,156 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>GameLine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link href="{% static 'timeline/styles.css' %}" rel="stylesheet">
+  <!-- Google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <!-- React -->
+  <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+  <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white">
+    <a id="logo" class="text-hide navbar-brand">TimeLine</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'index' %}"> Home <span class="sr-only">(current)</span></a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'all_opinions' %}">Opinions</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'game' %}">Quiz</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'create_opinion' %}">Create Opinion</a>
+        </li>
+        {% if user.is_authenticated and user.is_editor %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'create_post' %}">Create Post</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'reported_opinions' %}">Reported</a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+        </li>
+
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}">Log In</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'register' %}">Register</a>
+        </li>
+        {% endif %}
+      </ul>
+      <Div class="d-flex flex-grow-1 align-items-center pr-3">
+        <span class="flex-grow-1 bd-highlight"><!--placeholder--></span>
+
+        <span class="btn rounded-pill d-none d-md-inline-block">
+          {% if user.is_authenticated and user.is_editor %}
+          <span class="p-2 rounded-pill" style="background-color:rgb(213, 194, 231)">
+            {{user.username}}
+          </span>
+          <span class="p-2 rounded-pill" style="background-color:rgb(194, 231, 218)">
+            @
+          </span>
+          <strong class="p-2 rounded-pill" style="background-color:rgb(231, 194, 231)">Editor</strong>
+          {% else %}
+          <span class="p-2 rounded-pill" style="background-color:rgb(213, 194, 231)">
+            {{user.username}}
+          </span>
+          <span class="p-2 rounded-pill" style="background-color:rgb(194, 231, 218)">
+            @
+          </span>
+          <strong class="p-2 rounded-pill" style="background-color:rgb(196, 220, 236)">User</strong>
+          {% endif %}
+        </span>
+      </Div>
+    </div>
+  </nav>
+  <!-- ----------------------------------------------------------------- -->
+  <!-- ----------------------------------------------------------------- -->
+  <div class="body">
+    <div id="app"></div>
+        <script>
+            window.newQuiz = {
+                question: "{{ quiz.question }}",
+                answer: "{{ quiz.answer}}",
+            };
+        </script>
+
+        <script type="text/babel">
+
+
+        
+        function App() {
+          const [quiz, setQuiz] = React.useState(window.newQuiz);
+          const [myAnswer, setMyAnswer] = React.useState(false);
+
+          function getDisplayText() {
+            if (myAnswer) {
+              return quiz.answer;
+            } else {
+              return quiz.question;
+            }
+          }
+          
+          const getNextQuiz = () => {
+            fetch('/get/quiz/api/')
+              .then(res => res.json())
+              .then(quiz => {
+                setQuiz(quiz);
+                setmyAnswer(false); 
+              });
+          };
+
+          return (
+            <div className="container vw-100 vh-100 d-flex justify-content-center align-items-center">
+              <div className="row justify-content-center w-100 h-30">
+                <div className={`card col-8 col-md-6 back_round_color ${myAnswer ? 'flip' : ''}`}>
+                  <div className="card-body">
+                    <h5 className="card-title">Question</h5>
+                    <p className="card-text">{getDisplayText()}</p>
+                    <button class="btn btn-danger rounded-pill mr-2 btn-sm" onClick={() => setMyAnswer(!myAnswer)}>{myAnswer ? 'Hide Answer' : 'Show Answer'}</button>
+                    <button class="btn btn-info rounded-pill mr-2 btn-sm" onClick={getNextQuiz}>Next Quiz</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        }
+
+            ReactDOM.render(<App />, document.querySelector("#app"));
+        </script>
+  </div>
+  <!-- ----------------------------------------------------------------- -->
+  <!-- ----------------------------------------------------------------- -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+    integrity="sha512-bnIvzh6FU75ZKxp0GXLH9bewza/OIw6dLVh9ICg0gogclmYGguQJWl8U30WpbsGTqbIiAwxTsbe76DErLq5EDQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha256-OUFW7hFO0/r5aEGTQOz9F/aXQOt+TwqI1Z4fbVvww04=" crossorigin="anonymous"></script>
+</body>
+
+</html>

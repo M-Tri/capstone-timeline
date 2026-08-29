@@ -85,15 +85,7 @@ class Image(models.Model):
     is_main_image = models.BooleanField(default=False)
 
 
-class Supervise(models.Model):
+class Quiz(models.Model):
     id = models.AutoField(primary_key=True)
-    supervisor = models.ForeignKey(
-        User,
-        on_delete = models.CASCADE,
-        related_name = 'supervisees',
-        )
-    supervisee = models.ForeignKey(
-        User,
-        on_delete = models.CASCADE,
-        related_name = 'supervisors',
-        )
+    question = models.CharField(max_length=255)
+    answer = models.CharField(max_length=255)
