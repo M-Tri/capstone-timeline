@@ -18,8 +18,8 @@
                     <div class="carousel-inner">
                         {% for image in article.images.all %}
                         <div class="carousel-item {% if forloop.first %} active {% endif %}"
-                            style="height: 250px; background: #ffffff;">
-                            <img src="{{ image.url }}" class="d-block h-100 rounded"
+                            style="aspect-ratio: 16 / 9; background: #ffffff;">
+                            <img src="{{ image.url }}" class="d-block w-100 h-100 rounded"
                                 style="object-fit: contain; margin: 0 auto;" alt="Image">
                         </div>
                         {% empty %}
@@ -109,6 +109,8 @@
 
 {% else %}
 
-<div>Create Post</div>
+<div>
+    No posts yet,<a href="{% url 'create_post' %}"> create </a>the first post.
+</div>
 
 {% endif %}
