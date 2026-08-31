@@ -1,0 +1,429 @@
+[
+{
+    "model": "timeline.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$KXKH6CH8B1O84bbNz5ETpC$cZ4ADJ0YskyydU1a6e0HeI8Ofzl4rp/0RXFqKNh3SZM=",
+        "last_login": "2026-08-30T14:13:02Z",
+        "is_superuser": true,
+        "username": "user1",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-08-30T14:12:28Z",
+        "is_editor": true,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "timeline.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$rSBuJIjacldPhluFmAEFXA$A6zdi5/HciRNp1ArR5GsWrRzztBXN8NbRqqAASNLmpk=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "user2",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-08-30T14:13:45Z",
+        "is_editor": false,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "timeline.article",
+    "pk": 1,
+    "fields": {
+        "editor": 1,
+        "title": "The Nuclear Directive",
+        "author_name": "I.S.Hopefull",
+        "content": "The Directive: In late October 2025, President Trump instructed military leaders to begin testing nuclear weapons again to match the perceived advancements and modernization of programs in Russia and China",
+        "popularity": "Low",
+        "url_source": "https://www.theguardian.com/us-news/2025/oct/29/trump-pentagon-us-nuclear-weapons",
+        "post_creation_time": "2026-08-30T16:35:28.900Z",
+        "views": [
+            1
+        ]
+    }
+},
+{
+    "model": "timeline.article",
+    "pk": 2,
+    "fields": {
+        "editor": 1,
+        "title": "Why Gold? The Russian Case Study",
+        "author_name": "Gem",
+        "content": "Western sanctions effectively locked Russia out of the global dollar system, forcing Moscow to weaponize its natural resources and hoard gold as an economic shield. Because paper currencies can be frozen with a keystroke, global central banks panicked, dumped their euros, and aggressively bought up physical gold to avoid a similar fate—propelling spot gold to historic highs above $4,500 per ounce.",
+        "popularity": "High",
+        "url_source": "https://www.investing.com/analysis/why-gold-the-russian-case-study-200659236",
+        "post_creation_time": "2026-08-30T16:40:26.594Z",
+        "views": [
+            1
+        ]
+    }
+},
+{
+    "model": "timeline.article",
+    "pk": 3,
+    "fields": {
+        "editor": 1,
+        "title": "Prolonged Fuel Crisis",
+        "author_name": "Dr. Tr. J.",
+        "content": "The six-month-old US-Iran war has dramatically altered global energy markets, driving a massive surge in oil prices and creating a prolonged fuel crisis. The conflict, which began on February 28, 2026, with joint US-Israel airstrikes, has severely disrupted the world's most critical energy chokepoints",
+        "popularity": "High",
+        "url_source": "https://www.aljazeera.com/news/2026/8/30/mapping-the-iran-wars-strikes-on-gulf-energy-and-what-comes-next-for-oil",
+        "post_creation_time": "2026-08-30T16:49:43.027Z",
+        "views": [
+            1
+        ]
+    }
+},
+{
+    "model": "timeline.opinion",
+    "pk": 1,
+    "fields": {
+        "title": "Resuming Nuclear Tests is a Dangerous and Unnecessary Gamble",
+        "writer": 1,
+        "article": 1,
+        "content": "Trump's directive to resume nuclear testing is reckless posturing that solves no technical problem while creating immense geopolitical danger. The U.S. has maintained its nuclear stockpile safely and reliably for decades using supercomputer modeling and advanced tools—a \"science-based approach\" that has been certified annually by the Pentagon and Department of Energy. Even Energy Secretary Chris Wright and the commander of U.S. nuclear forces have admitted there is no technical need for explosive testing. This is purely political theater—a message to Russia and China—that will trigger a chain reaction of testing by adversaries and could collapse the global non-proliferation system built over decades. We are trading global stability for a meaningless flex.",
+        "post_creation_time": "2026-08-30T16:52:57.231Z",
+        "bias": 42,
+        "views": [],
+        "reporter": []
+    }
+},
+{
+    "model": "timeline.opinion",
+    "pk": 2,
+    "fields": {
+        "title": "If Our Adversaries Are Testing, We Must Test Too",
+        "writer": 1,
+        "article": 1,
+        "content": "The world has changed. Russia and China are conducting underground nuclear tests—Russia's last was in 1990, China's in 1996, but U.S. officials have stated they are testing at yields in the \"hundreds of tons\" underground. We cannot afford to be the only major power handicapping ourselves while our adversaries modernize their arsenals in secret. The New START treaty expired in February 2026, and China refuses to join any arms control framework. Trump's directive for the U.S. to test \"on an equal basis\" with Russia and China is simply leveling the playing field. Some experts have warned that aging U.S. warheads may not function properly without live testing. If Pakistan, North Korea, and others are testing, why should America unilaterally disarm itself? This isn't aggression—it's deterrence.",
+        "post_creation_time": "2026-08-30T16:53:53.540Z",
+        "bias": 60,
+        "views": [],
+        "reporter": []
+    }
+},
+{
+    "model": "timeline.opinion",
+    "pk": 3,
+    "fields": {
+        "title": "The Administration Can't Even Explain What \"Testing\" Means",
+        "writer": 1,
+        "article": 1,
+        "content": "This entire directive is incoherent. Trump says he wants to resume nuclear testing, but his own officials can't agree on what that means. Energy Secretary Wright clarified that the U.S. would focus on \"noncritical explosions\"—testing components, not actual nuclear detonations—which is routine and already happening. But the State Department's top arms control official won't rule out full-scale underground explosive tests. Meanwhile, the president apparently didn't even know that the Department of Energy—not the Pentagon—manages the nuclear arsenal. This is policy by tweet, not strategy. If we're going to break a 33-year moratorium and risk triggering a global arms race, we deserve a clear, coherent rationale—not vague claims about \"vibrations\" underground. The fact that even U.S. officials are confused should terrify everyone.",
+        "post_creation_time": "2026-08-30T16:54:29.243Z",
+        "bias": 59,
+        "views": [],
+        "reporter": []
+    }
+},
+{
+    "model": "timeline.opinion",
+    "pk": 4,
+    "fields": {
+        "title": "Gold is the Only Real Money Left—The Dollar's Exorbitant Privilege is Over",
+        "writer": 1,
+        "article": 2,
+        "content": "What happened to Russia is a warning shot for every nation on Earth. The West weaponized the SWIFT system and froze over $300 billion in Russian reserves literally overnight. That single act told every central bank in Beijing, Riyadh, and New Delhi: your dollars and euros are just hostage material. So what did they do? They dumped Western paper and bought physical gold—the only asset that cannot be \"deleted\" with a keystroke. Now gold is trading above $4,500, and this isn't a bubble; it's a fundamental re-pricing of trust. The U.S. dollar's status as the global reserve currency was built on the promise of rule-of-law, but that promise is now broken. We are entering a bipolar monetary world where gold backs the East and paper backs the West. If you aren't holding physical metal, you are betting on the honesty of politicians—and that is the worst bet in history.",
+        "post_creation_time": "2026-08-30T16:55:30.440Z",
+        "bias": 42,
+        "views": [],
+        "reporter": []
+    }
+},
+{
+    "model": "timeline.opinion",
+    "pk": 5,
+    "fields": {
+        "title": "The US-Iran War is an Unmitigated Energy Disaster—And We Saw It Coming",
+        "writer": 1,
+        "article": 3,
+        "content": "Six months into this catastrophic conflict, the global economy is bleeding out at the pump. The February 28 airstrikes may have been framed as a \"surgical\" response to Iranian aggression, but the reality is that we have ignited a regional firestorm that has choked off the Strait of Hormuz—the lifeline for nearly 20% of the world's oil. Prices have soared past $150 a barrel, and inflation is spiraling out of control in developing nations that depend on Middle Eastern crude. What was the strategic objective here? Regime change? Nuclear disarmament? All we have achieved is a humanitarian catastrophe, a fractured global supply chain, and a gift to Russia and China, who are now selling their oil at a premium to desperate buyers. The Pentagon assured us this would be \"limited\" and \"contained.\" Instead, we are rationing fuel in major American cities and watching our allies in Europe freeze through winter without Russian gas alternatives. This war wasn't a miscalculation—it was a willful ignorance of basic energy realities. The only winners are the oil speculators and defense contractors.",
+        "post_creation_time": "2026-08-30T16:56:32.575Z",
+        "bias": 14,
+        "views": [],
+        "reporter": []
+    }
+},
+{
+    "model": "timeline.opinion",
+    "pk": 6,
+    "fields": {
+        "title": "Energy Disruption is an Acceptable Trade-Off for Long-Term National Security",
+        "writer": 1,
+        "article": 3,
+        "content": "While the current spike in fuel prices is undeniably painful for families and businesses, we must view this as a necessary short-term cost of confronting a regime that has destabilized the Middle East for decades. The February 28 airstrikes were not an act of aggression but a defensive response to Iran's continued nuclear ambitions and its aggression against commercial shipping. Yes, the Strait of Hormuz disruption has impacted global supply, but the United States has significant strategic reserves and domestic production capacity to weather this storm. Critics who focus exclusively on economic metrics overlook the broader security calculus: allowing Iran to achieve nuclear breakout would pose an existential threat to our allies and eventually trigger an even more catastrophic conflict. This is not about warmongering—it is about responsible statecraft. Every American has the right to express concern about rising costs, and those concerns are valid. However, we must also acknowledge that some sacrifices are unavoidable when safeguarding global stability. The administration has a duty to accelerate domestic energy production and provide relief to vulnerable communities, but abandoning our strategic objectives would be a far greater failure.",
+        "post_creation_time": "2026-08-30T16:58:46.973Z",
+        "bias": 90,
+        "views": [],
+        "reporter": []
+    }
+},
+{
+    "model": "timeline.label",
+    "pk": 1,
+    "fields": {
+        "name": "Far-Left",
+        "opinions": []
+    }
+},
+{
+    "model": "timeline.label",
+    "pk": 2,
+    "fields": {
+        "name": "Progressive",
+        "opinions": [
+            1,
+            5
+        ]
+    }
+},
+{
+    "model": "timeline.label",
+    "pk": 3,
+    "fields": {
+        "name": "Centrist",
+        "opinions": []
+    }
+},
+{
+    "model": "timeline.label",
+    "pk": 4,
+    "fields": {
+        "name": "Conservative",
+        "opinions": [
+            2,
+            6
+        ]
+    }
+},
+{
+    "model": "timeline.label",
+    "pk": 5,
+    "fields": {
+        "name": "Far-Right",
+        "opinions": []
+    }
+},
+{
+    "model": "timeline.label",
+    "pk": 6,
+    "fields": {
+        "name": "Authoritarian",
+        "opinions": []
+    }
+},
+{
+    "model": "timeline.label",
+    "pk": 7,
+    "fields": {
+        "name": "Right-Wing Autocrat",
+        "opinions": []
+    }
+},
+{
+    "model": "timeline.label",
+    "pk": 8,
+    "fields": {
+        "name": "Left-Wing Autocrat",
+        "opinions": []
+    }
+},
+{
+    "model": "timeline.label",
+    "pk": 9,
+    "fields": {
+        "name": "Theocratic Supporter",
+        "opinions": []
+    }
+},
+{
+    "model": "timeline.label",
+    "pk": 10,
+    "fields": {
+        "name": "Theocratic Supporter",
+        "opinions": []
+    }
+},
+{
+    "model": "timeline.label",
+    "pk": 11,
+    "fields": {
+        "name": "System Loyalist",
+        "opinions": [
+            2
+        ]
+    }
+},
+{
+    "model": "timeline.label",
+    "pk": 12,
+    "fields": {
+        "name": "Anarchist",
+        "opinions": [
+            3
+        ]
+    }
+},
+{
+    "model": "timeline.label",
+    "pk": 13,
+    "fields": {
+        "name": "The Everyman",
+        "opinions": [
+            2,
+            3
+        ]
+    }
+},
+{
+    "model": "timeline.label",
+    "pk": 14,
+    "fields": {
+        "name": "Pragmatist",
+        "opinions": [
+            1,
+            5,
+            6
+        ]
+    }
+},
+{
+    "model": "timeline.label",
+    "pk": 15,
+    "fields": {
+        "name": "The Tribalist",
+        "opinions": []
+    }
+},
+{
+    "model": "timeline.label",
+    "pk": 16,
+    "fields": {
+        "name": "The Genuinely Confused",
+        "opinions": [
+            4
+        ]
+    }
+},
+{
+    "model": "timeline.image",
+    "pk": 1,
+    "fields": {
+        "article": 1,
+        "creation_time": "2026-08-30T16:35:28.902Z",
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTYGzfwXVg7dn6c66FmzV5tkuYfmk8SM2Kgz-0LGePZw&s=10",
+        "is_main_image": true
+    }
+},
+{
+    "model": "timeline.image",
+    "pk": 2,
+    "fields": {
+        "article": 1,
+        "creation_time": "2026-08-30T16:35:28.903Z",
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwB5uDA7ZNKWE4fyMQFrcWUDV8NAQicrrqqjjJn-0_SQ&s=10",
+        "is_main_image": false
+    }
+},
+{
+    "model": "timeline.image",
+    "pk": 3,
+    "fields": {
+        "article": 2,
+        "creation_time": "2026-08-30T16:40:26.596Z",
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr1yD4cySNObUTC-hA0hXznNIPkgxM8MPb4YQNMuk8Wg&s=10",
+        "is_main_image": true
+    }
+},
+{
+    "model": "timeline.image",
+    "pk": 4,
+    "fields": {
+        "article": 2,
+        "creation_time": "2026-08-30T16:40:26.596Z",
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9RKSCBi5MnjZoT4zSuBEj9FAYE4urbbNtJLl-PfGj3Q&s=10",
+        "is_main_image": false
+    }
+},
+{
+    "model": "timeline.image",
+    "pk": 5,
+    "fields": {
+        "article": 2,
+        "creation_time": "2026-08-30T16:40:26.597Z",
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQInC1vAYkeC-a69EXe3CxddqnEmr3vVr9MA6uBTDrZNw&s=10",
+        "is_main_image": false
+    }
+},
+{
+    "model": "timeline.image",
+    "pk": 6,
+    "fields": {
+        "article": 3,
+        "creation_time": "2026-08-30T16:49:43.028Z",
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvub-mq2SHh-35Fl24AvEiO7BD0iuo-iZpaMfEruhcWQ&s=10",
+        "is_main_image": true
+    }
+},
+{
+    "model": "timeline.image",
+    "pk": 7,
+    "fields": {
+        "article": 3,
+        "creation_time": "2026-08-30T16:49:43.028Z",
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9ze858XMBRxBCVeD0hRR8yEBfk7sqZCHpJPvNwJE4yg&s=10",
+        "is_main_image": false
+    }
+},
+{
+    "model": "timeline.quiz",
+    "pk": 1,
+    "fields": {
+        "question": "On January 20, 2025, who took the oath as U.S. President—again?",
+        "answer": "Trump became the 47th president, making history as the only guy to get a second non-consecutive term. The Oval Office really does have a revolving door."
+    }
+},
+{
+    "model": "timeline.quiz",
+    "pk": 2,
+    "fields": {
+        "question": "In April 2025, what did America unleash on global trade?",
+        "answer": "The U.S. slapped tariffs on most trading partners, pushing effective rates to levels not seen since the Great Depression. Globalization's funeral was well-attended."
+    }
+},
+{
+    "model": "timeline.quiz",
+    "pk": 3,
+    "fields": {
+        "question": "Which tech had everyone panicking and pontificating in 2025?",
+        "answer": "AI went from \"chatbot\" to \"world dominator\" in record time. DeepSeek, ChatGPT, and their robot cousins made us all question our careers—and our sanity."
+    }
+},
+{
+    "model": "timeline.quiz",
+    "pk": 4,
+    "fields": {
+        "question": "Which trio co-hosted the 2026 FIFA World Cup?",
+        "answer": "North America united over soccer—the only thing more improbable than a 0-0 draw."
+    }
+},
+{
+    "model": "timeline.quiz",
+    "pk": 5,
+    "fields": {
+        "question": "Which global club welcomed Indonesia as a new member in 2025?",
+        "answer": "BRICS expanded its roster at the Brazil summit. Indonesia joined the exclusive group of nations that like to remind the West they exist."
+    }
+}
+]
