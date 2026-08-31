@@ -121,14 +121,14 @@
               .then(res => res.json())
               .then(quiz => {
                 setQuiz(quiz);
-                setmyAnswer(false); 
+                setMyAnswer(false); 
               });
           };
 
           return (
             <div className="container vw-100 vh-100 d-flex justify-content-center align-items-center">
               <div className="row justify-content-center w-100 h-30">
-                <div className={`card col-8 col-md-6 back_round_color ${myAnswer ? 'flip' : ''}`}>
+                <div className={`card col-12 col-md-8 back_round_color ${myAnswer ? 'flip' : ''}`}>
                   <div className="card-body">
                     <h5 className="card-title">Question</h5>
                     <p className="card-text">{getDisplayText()}</p>
