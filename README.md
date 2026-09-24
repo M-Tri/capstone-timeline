@@ -1,3 +1,13 @@
+## Demo Access for editor mode
+
+Want to explore the editor experience?
+
+- **Site:** https://amineott.pythonanywhere.com
+- **Username:** `demo`
+- **Password:** `demo1234`
+
+The demo account is set to editor mode, so you can see the editor-only interface and features.
+
 ## Project Overview
 
 Time Capsule News is an interactive web platform designed to preserve and contrast historical perspectives by allowing users to explore how past events were perceived in real-time versus how they are interpreted with future hindsight. Unlike standard social networks or e-commerce platforms, the application centers around an evolving chronological timeline that bridges past news, public opinion, and reflective analysis. The platform provides a rich user experience featuring interactive pages for viewing current news feeds, submitting and exploring time-stamped opinions, engaging with dynamically generated quizzes, publishing posts, and managing content moderation through a reporting system. Powered by a Django backend and enhanced with custom JavaScript and responsive Bootstrap design, the app delivers dynamic asynchronous content loading, client-side interactivity, and tailored user flows without requiring full page refreshes.
