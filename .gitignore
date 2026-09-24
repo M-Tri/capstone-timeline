@@ -1,0 +1,40 @@
+# Video
+finalProjectFinalCopy.mp4
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+
+# Django local DB
+db.sqlite3
+db.sqlite3-journal
+*.log
+local_settings.py
+
+# Environment
+.env
+.env.local
+
+# Virtual env
+env/
+venv/
+ENV/
+myenv/
+env_for_auctions/
+
+# Static (regenerated on server)
+staticfiles/
+
+# IDE / OS
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Personal
+problem_journal.md
+README3.md
+*.drawio
