@@ -3,8 +3,8 @@
 Want to explore the editor experience?
 
 - **Site:** https://amineott.pythonanywhere.com
-- **Username:** `demo`
-- **Password:** `demo1234`
+- **Username:** `demo123`
+- **Password:** `readme4242`
 
 The demo account is set to editor mode, so you can see the editor-only interface and features.
 
