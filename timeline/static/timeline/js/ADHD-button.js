@@ -1,50 +1,70 @@
 let counter = 0;
 let timer_id = 0;
 const duration = 10;
+
 function count() {
   counter++;
   let remaining = duration - counter;
-  document.querySelector('#ADHD-button').value = remaining;
-  document.querySelector('#ADHD-button').textContent = remaining;
-  // Reset
+  
+  const adhdBtn = document.querySelector('#ADHD-button');
+  adhdBtn.value = remaining;
+  adhdBtn.textContent = remaining;
+
+  // Reset when time is up
   if (counter >= duration) {
-    clearInterval(timer_id)
+    clearInterval(timer_id);
+    timer_id = 0;
     counter = 0;
-    revert_color()
+    
+    revert_color();
+    
+    // Re-enable all buttons
+    adhdBtn.disabled = false;
     document.querySelector('#opinion-button').disabled = false;
     document.querySelector('#random-button').disabled = false;
   }
-};
+}
 
 function change_color() {
-    document.querySelector('#ADHD-button').classList.remove("bg-danger");
-    document.querySelector('#ADHD-button').classList.add("bg-success");
-    document.querySelector('#ADHD-button').value = "ADHD ON";
-    document.querySelector('#ADHD-button').textContent = "ADHD ON";
+  const adhdBtn = document.querySelector('#ADHD-button');
+  adhdBtn.classList.remove("bg-danger");
+  adhdBtn.classList.add("bg-success");
+  adhdBtn.value = "ADHD ON";
+  adhdBtn.textContent = "ADHD ON";
 }
 
 function revert_color() {
-    document.querySelector('#ADHD-button').classList.remove("bg-success");
-    document.querySelector('#ADHD-button').classList.add("bg-danger");
-    document.querySelector('#ADHD-button').value = "ADHD";
-    document.querySelector('#ADHD-button').textContent = "ADHD OFF";
+  const adhdBtn = document.querySelector('#ADHD-button');
+  adhdBtn.classList.remove("bg-success");
+  adhdBtn.classList.add("bg-danger");
+  adhdBtn.value = "ADHD OFF";
+  adhdBtn.textContent = "ADHD OFF";
 }
 
 function change_ADHD_state() {
-  // disable buttons
+  // 1. Guard clause: If timer is already running, ignore the click
+  if (timer_id !== 0) {
+    return;
+  }
+
+  const adhdBtn = document.querySelector('#ADHD-button');
+  
+  // 2. Disable the ADHD button itself to prevent further clicks
+  adhdBtn.disabled = true;
+
+  // Disable other buttons
   document.querySelector('#opinion-button').disabled = true;
   document.querySelector('#random-button').disabled = true;
-  // Change change_color
+  
+  // Change color
   change_color();
 
   counter = 0;
-
   timer_id = setInterval(count, 1000);
-};
+}
 
 // Start
 document.addEventListener('DOMContentLoaded', function() {
-  // ADHD button : card.html
   const btn_ADHD = document.querySelector('#ADHD-button');
   if (btn_ADHD) {
     btn_ADHD.onclick = change_ADHD_state;
