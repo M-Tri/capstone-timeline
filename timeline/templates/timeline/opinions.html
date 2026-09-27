@@ -12,17 +12,23 @@
           <div class="d-flex">
             <h5 class="card-title rounded rounded-pill" style="{% if opinion.bias < 40 %}background-color: rgb(212, 237, 218);{% elif opinion.bias < 70 %}background-color: rgb(255, 243, 205);{% else %}background-color: rgb(250, 218, 221);{% endif %}"><strong class="roboto-bold">{{opinion.title}}</strong></h5>
               <span class="ml-auto">
-              <form method="POST" action="{% url 'report_opinion' opinion_id=opinion.id %}">
-              {% csrf_token %}
-              {% if request.user in opinion.reporter.all %}
-                <button id="report-button" class="btn btn-secondary rounded-pill btn-sm" disabled>
-                Reported
-                </button>
-              {% else %}
-                <button id="report-button" class="btn btn-dark rounded-pill btn-sm" type="submit">
-                  Report
-                </button>
-              {% endif %}
+                <form method="POST" action="{% url 'report_opinion' opinion_id=opinion.id %}">
+                {% csrf_token %}
+                {% if request.user.is_authenticated %}
+                  {% if request.user in opinion.reporter.all %}
+                    <button id="report-button" class="btn btn-secondary rounded-pill btn-sm" disabled>
+                      Reported
+                    </button>
+                  {% else %}
+                    <button id="report-button" class="btn btn-dark rounded-pill btn-sm" type="submit">
+                      Report
+                    </button>
+                  {% endif %}
+                {% else %}
+                  <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-outline-dark rounded-pill btn-sm">
+                    Report
+                  </a>
+                {% endif %}
               </form>
             </span>
           </div>
